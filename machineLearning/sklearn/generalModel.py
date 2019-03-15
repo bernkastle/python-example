@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time : 15/03/2019 14:12
+# @Author : karl wang
+# @Email: karl.wang.1991@gmail.com
+
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
