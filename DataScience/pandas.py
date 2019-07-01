@@ -44,3 +44,15 @@ def groupby_filter():
     # 对count > 1的数据进行过滤
     data = data.groupby('col1').filter(lambda x: len(x) > 1)
     return data
+
+
+def sort_multiindex_by_index_and_column(data: pd.DataFrame) -> pd.DataFrame:
+    """
+    多重索引对index和column同时进行排序
+    :param data: 原始数据集
+    :return: 排序后的数据集
+    """
+    df = data.groupby(['category', 'baseunitname'])\
+        .agg({'ean_basebarcode': 'count'})\
+        .sort_values(by=['category', 'ean_basebarcode'], ascending=[0, 0])  # 使用排序时，分别传入index和column name，后面的ascending也需要传入数组
+    return df
