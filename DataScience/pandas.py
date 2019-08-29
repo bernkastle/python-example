@@ -52,7 +52,20 @@ def sort_multiindex_by_index_and_column(data: pd.DataFrame) -> pd.DataFrame:
     :param data: 原始数据集
     :return: 排序后的数据集
     """
-    df = data.groupby(['category', 'baseunitname'])\
-        .agg({'ean_basebarcode': 'count'})\
-        .sort_values(by=['category', 'ean_basebarcode'], ascending=[0, 0])  # 使用排序时，分别传入index和column name，后面的ascending也需要传入数组
+    df = data.groupby(['category', 'baseunitname']) \
+        .agg({'ean_basebarcode': 'count'}) \
+        .sort_values(by=['category', 'ean_basebarcode'],
+                     ascending=[0, 0])  # 使用排序时，分别传入index和column name，后面的ascending也需要传入数组
     return df
+
+
+def get_date_series(start_date: str, end_date: str) -> [str]:
+    """
+    使用pandas生成日期列表
+    :param start_date: 开始日期
+    :param end_date: 结束日期
+    :return: 日期列表，字符类型
+    """
+    date_list = pd.date_range(start=start_date, end=end_date, freq='d')
+    data_list = [str(x)[:10] for x in date_list]
+    return data_list
